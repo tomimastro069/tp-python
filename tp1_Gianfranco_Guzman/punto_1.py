@@ -2,3 +2,4 @@
 #bienvenida por consola con el nombre asignado a la variable. Por ejemplo: si asigno
 #“Fernando”, me aparezca “Bienvenido Fernando”. 
 nombre= "Fernando"
+print(nombre)
