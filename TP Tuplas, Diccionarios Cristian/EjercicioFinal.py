@@ -1,12 +1,12 @@
 def main():
     inventario = {
-        "A001": ("PlayStation 5 Pro", 1500),
-         "A002": ("Mouse", 25),
-         "A003": ("Teclado", 45),     
-         "A004": ("Procesador I9", 300),     
-         "A005": ("Monitor", 120)}
+        "01": ("PlayStation 5 Pro", 1500),
+         "02": ("Mouse", 25),
+         "03": ("Teclado", 45),     
+         "04": ("Procesador I9", 300),     
+         "05": ("Monitor", 120)}
     mostrar_inventario(inventario)
-
+    
     codigo = input("\t-----\nBuscar un producto por su codigo\nIngrese el codigo: ")
     buscar_producto(inventario,codigo)
     
@@ -27,29 +27,32 @@ def mostrar_inventario(inventario):
     print(f"\tInventario\n\t{inventario}")
 
 def buscar_producto(inventario,codigo):
-    print(f"Producto de inventario: {inventario[codigo]}" if codigo in inventario else "No existe el codigo en el inventario")
+    if codigo in inventario:
+        print(f"Producto: {inventario[codigo]}")
+    else:
+        print("El codigo no esta en el inventario")
 
 def modificar_precio(inventario, codigo, nuevo_precio):
-    nombre,precio_Actual = inventario[codigo]
-    try:
-        inventario[codigo] = (nombre,nuevo_precio)
-        print(f"Nuevo precio: {inventario[codigo]}")
-        inventario = tuple(inventario)
-    except KeyError:
-        print("No se existe el codigo en el inventario")
-        inventario = tuple(inventario)
+    producto = inventario.get(codigo)
+    if producto:
+        # Actualizar el precio
+        inventario[codigo] = (producto[0], nuevo_precio)
+        print(f"El precio del producto con código {codigo} ha sido actualizado a ${nuevo_precio}")
+    else:
+        print(f"El código {codigo} no existe en el inventario")
         
 def eliminar_producto(inventario, codigo):
-    try:
+    if codigo in inventario:
         inventario.pop(codigo)
-    except KeyError:
-        print("Error. No existe ese codigo")
-    print(f"Elemento eliminado: {inventario}")
+        print(f"El producto con codigo {codigo} fue eliminado")
+    else:
+        print(f"El codigo {codigo} no existe")
 
 def productos_por_rango_de_precio(inventario,min_precio,max_precio):
-    for codigo in inventario:
-        if max_precio > inventario[codigo][1] > min_precio :
-            print(inventario[codigo])
+    print(f"Productos en el rango de precio entre {min_precio} y  {max_precio}")
+    for clave,valor in inventario.items():
+        if min_precio < valor[1] < max_precio:
+            print(f"Codigo: {clave}, Descripcion: {valor}")
 
 
 if __name__ == "__main__":
