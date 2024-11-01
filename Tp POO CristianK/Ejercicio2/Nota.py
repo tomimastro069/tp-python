@@ -3,4 +3,4 @@ class Nota:
         self.catedra = catedra
         self.notaExamen = notaExamen
     def __str__(self):
-        return f"{self.catedra} :{self.notaExamen}"
+        return f"{self.catedra}: {self.notaExamen}"

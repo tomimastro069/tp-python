@@ -5,9 +5,15 @@ class Alumno:
         self.legajo = legajo
         self.notas = []
 
-    def ingresoNota(self,notas):
-        self.notas = notas
+    def ingresoNota(self,nota):
+        self.notas.append(nota)
+    
+    def promedioNotas(self):
+        suma = 0
+        for nota in self.notas:
+            suma += nota.notaExamen
+        return suma/len(self.notas)
     
     def __str__(self):
-        notas_str = ", ".join(str(nota) for nota in self.notas)
-        return  f"---\nNombre: {self.nombreCompleto},\nLegajo: {self.legajo},\nNotas: {notas_str}\n---"
+        lista_notas = "".join( [f"\n{nota}\n " for nota in self.notas] )
+        return  f"---\nNombre: {self.nombreCompleto},\nLegajo: {self.legajo},\nNotas:\n{lista_notas}\n"

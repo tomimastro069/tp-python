@@ -1,4 +1,4 @@
-import os  #os.system("cls")
+import os 
 from metodos import numeroPositivoEntero,numeroPositivoFlotante,esBebida
 from Plato import Plato
 from Ingrediente  import Ingrediente
@@ -14,34 +14,34 @@ class MenuRestaurant:
 
     @staticmethod
     def cargarPlatos():
-        cantidadPlatos = numeroPositivoEntero("Ingrese la cantidad de platos: ")
-        for i in  range(cantidadPlatos):
+        while True:
             print("-------------------\n")
             nombre = input("Ingrese el nombre del plato: ")
+            if  nombre == ""  or nombre == "FIN":
+                break
             precio = numeroPositivoEntero(f"Ingrese el precio de {nombre}: ")
             bebida = input("¿Es una bebida? (True/False): ")
             if(not esBebida(bebida)):
-                print("\tIngredientes:\n")
-                listaIngredientes = MenuRestaurant.ingresarIngredientes()
-                plato = Plato(nombre, precio, bebida)
-                plato.agregarIngredientes(listaIngredientes)
+                print("Ingredientes:\n")
+                plato = Plato(nombre, precio, esBebida("false"))
+                while True:
+                    nombre = input("Nombre: ")
+                    if nombre == "" or nombre.lower() in ("fin"):
+                        break
+                    cantidad = numeroPositivoEntero(f"Ingrese la cantidad de {nombre}: ")
+                    undMedida =  input("Unidad de medida: ")
+                    ingredienteX = Ingrediente(nombre,cantidad,undMedida)
+                    plato.agregarIngrediente(ingredienteX)
                 MenuRestaurant.platosMenu.append(plato)
             else:
-                plato = Plato(nombre,precio,bebida)
+                plato = Plato(nombre,precio,esBebida("true"))
                 MenuRestaurant.platosMenu.append(plato)
-
-    @staticmethod
-    def ingresarIngredientes():
-        lista_ingredientes = []
-        while(True ):
-            nombre = input("Ingrese el nombre del ingrediente: ")
-            if(nombre == "FIN"):
+            reiniciar = input(f"-----\nIngresar otro plato (S/N)?\n")
+            print()
+            if reiniciar in ("N","n"):
                 break
-            cantidad = numeroPositivoEntero(f"Ingrese la cantidad de {nombre}: ")
-            unidadMedida = input(f"Ingrese la unidad de medida de {nombre}: ")
-            ingredientex = Ingrediente(nombre,cantidad,unidadMedida)
-            lista_ingredientes.append(ingredientex)
-        return  lista_ingredientes
+    
+
 
     @staticmethod
     def  mostrarPlatos():

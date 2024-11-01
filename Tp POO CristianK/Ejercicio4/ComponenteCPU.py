@@ -4,3 +4,6 @@ class ComponenteCPU:
         self.marca = marca
         self.cantidad = cantidad
         self.precio = precio
+
+    def __str__(self):
+        return f"{self.componente}\t{self.marca}\t{self.cantidad}\t{self.precio}"
