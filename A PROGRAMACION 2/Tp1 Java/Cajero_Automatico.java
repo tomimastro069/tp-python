@@ -12,9 +12,6 @@ public class Cajero_Automatico {
 
     //Metodos
 
-    public static void caca(){
-        System.out.println("mucha caca");
-    }
     public boolean isAcepta() {
         return acepta;
     }
